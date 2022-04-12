@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="400.0" spacing="40.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLTempAppController">
+   <children>
+      <Label fx:id="locationLabel" style="-fx-font-weight: bold;" text="MC3 Blue Bell Campus Weather" textAlignment="CENTER" />
+      <Label fx:id="tempLabel" alignment="CENTER" text="--" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="120.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" spacing="20.0">
+         <children>
+            <Label style="-fx-font-weight: bold;" text="High:" />
+            <Label fx:id="highTempLabel" text="--" />
+            <Label style="-fx-font-weight: bold;" text="Low:" />
+            <Label fx:id="lowTempLabel" text="--" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="40.0">
+         <children>
+            <RadioButton fx:id="celsiusRadio" mnemonicParsing="false" onAction="#handleUnitConversionRadioButtonAction" text="Celsius">
+               <toggleGroup>
+                  <ToggleGroup fx:id="unit" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="fahrenheitRadio" mnemonicParsing="false" onAction="#handleUnitConversionRadioButtonAction" selected="true" text="Fahrenheit" toggleGroup="$unit">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </RadioButton>
+         </children>
+      </HBox>
+      <Button fx:id="refreshForecast" mnemonicParsing="false" onAction="#handleRefreshButtonAction" text="Refresh Forecast" />
+      <Label fx:id="updateLabel" style="-fx-font-style: italic; -fx-font-size: 12pt;" text="Last Update" textAlignment="CENTER" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
