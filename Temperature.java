@@ -3,6 +3,5 @@
 // A sample of this data is found in ReferenceAPIData.json
 
 public class Temperature {
-   public Current current;
-   public Daily[] daily;  
+   public Main main;
 }

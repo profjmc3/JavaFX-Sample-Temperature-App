@@ -1,3 +1,52 @@
+// NEW API DATA
+{
+    "coord": {
+        "lon": -75.278,
+        "lat": 40.1742
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 284.75,
+        "feels_like": 283.35,
+        "temp_min": 283.26,
+        "temp_max": 286.92,
+        "pressure": 1041,
+        "humidity": 53
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.45,
+        "deg": 287,
+        "gust": 1.34
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1668017046,
+    "sys": {
+        "type": 2,
+        "id": 2004264,
+        "country": "US",
+        "sunrise": 1667993985,
+        "sunset": 1668030613
+    },
+    "timezone": -18000,
+    "id": 5180961,
+    "name": "Blue Bell",
+    "cod": 200
+}
+
+
+
+// OLD API DATA
 {
     "lat": 40.1742,
     "lon": -75.278,

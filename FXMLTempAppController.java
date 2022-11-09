@@ -93,11 +93,11 @@ public class FXMLTempAppController implements Initializable {
    protected void updateUI() {
 
       // Set the temp label
-      tempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.current.temp) ) ) );
+      tempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp) ) ) );
 
       // Update min & max temperatures (hi and low for the day)
-      highTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(temperature.daily[0].temp.min) ) ) );    
-      lowTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(temperature.daily[0].temp.max) ) ) );     
+      highTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp_min) ) ) );    
+      lowTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp_max) ) ) );     
    
       // Update the time data was refreshed.
       SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm a");
@@ -145,6 +145,7 @@ public class FXMLTempAppController implements Initializable {
    // This method is run when the user hits the refresh button and the app is initialized
    protected void updateWeatherData() {
    
+      System.out.println(  System.getenv("APIKEY")  );
       // Only create the HttpClient one time
       // The app can use the same client for its entire life
       if(this.client == null)
@@ -161,7 +162,7 @@ public class FXMLTempAppController implements Initializable {
             // Set this in your environment. When you distribute the app, how you store and distribute this value is something to address.
             // We will review how I set this value in class.
             HttpRequest request = HttpRequest.newBuilder()
-               .uri(new URI("https://api.openweathermap.org/data/2.5/onecall?lat=40.17423766234042&lon=-75.27796262961655&exclude=minutely,hourly&appid=" + System.getenv("APIKEY") ))
+               .uri(new URI("https://api.openweathermap.org/data/2.5/weather?lat=40.17423766234042&lon=-75.27796262961655&exclude=minutely,hourly&appid=" + System.getenv("APIKEY") ))
                .GET()
                .build();
                              
