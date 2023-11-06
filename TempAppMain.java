@@ -32,6 +32,7 @@ public class TempAppMain extends Application
       //   is found in FXMLTempAppController.java
       
    }
+   
    @Override
    public void stop() {
       System.out.println("Stop is called in Application class");

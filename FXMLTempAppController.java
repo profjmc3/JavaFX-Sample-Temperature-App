@@ -145,7 +145,6 @@ public class FXMLTempAppController implements Initializable {
    // This method is run when the user hits the refresh button and the app is initialized
    protected void updateWeatherData() {
    
-      System.out.println(  System.getenv("APIKEY")  );
       // Only create the HttpClient one time
       // The app can use the same client for its entire life
       if(this.client == null)
@@ -162,17 +161,17 @@ public class FXMLTempAppController implements Initializable {
             // Set this in your environment. When you distribute the app, how you store and distribute this value is something to address.
             // We will review how I set this value in class.
             HttpRequest request = HttpRequest.newBuilder()
-               .uri(new URI("https://api.openweathermap.org/data/2.5/weather?lat=40.17423766234042&lon=-75.27796262961655&exclude=minutely,hourly&appid=" + System.getenv("APIKEY") ))
-               .GET()
-               .build();
+                                             .uri(new URI("https://api.openweathermap.org/data/2.5/weather?lat=40.17423766234042&lon=-75.27796262961655&exclude=minutely,hourly&appid=" + System.getenv("APIKEY") ))
+                                             .GET()
+                                             .build();
                              
            // Use Java's new :: method reference syntax to schedule callbacks to handle the data once retrieved
            // A callback is code to run later when the data is ready.
            // Note that HttpResponse::body is the same as calling the HttpResponse classes method body() on the response instance returned
            // Note that this::processWeatherData is the same as this.processWeatherData() 
            client.sendAsync(request, BodyHandlers.ofString())
-               .thenApply(HttpResponse::body)
-               .thenAccept(this::processWeatherData);     
+                 .thenApply(HttpResponse::body)
+                 .thenAccept(this::processWeatherData);     
            
           } catch(URISyntaxException e) { 
             // This message can be more informative if your API is more complex
@@ -205,6 +204,7 @@ public class FXMLTempAppController implements Initializable {
 
       // Get new weather data
       // This is the same method called when the refresh button is pressed.
+
       updateWeatherData();
    
    }
