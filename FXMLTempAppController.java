@@ -92,16 +92,19 @@ public class FXMLTempAppController implements Initializable {
    // Simple app, update anything and everything all of the time
    protected void updateUI() {
 
-      // Set the temp label
-      tempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp) ) ) );
-
-      // Update min & max temperatures (hi and low for the day)
-      highTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp_min) ) ) );    
-      lowTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp_max) ) ) );     
+      if(this.temperature.main != null)
+      {
+         // Set the temp label
+         tempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp) ) ) );
    
-      // Update the time data was refreshed.
-      SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm a");
-      updateLabel.setText( fmt.format(this.updateTime) );
+         // Update min & max temperatures (hi and low for the day)
+         highTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp_min) ) ) );    
+         lowTempLabel.setText( String.format("%d\u00B0", Math.round( getTempInProperUnit(this.temperature.main.temp_max) ) ) );     
+      
+         // Update the time data was refreshed.
+         SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm a");
+         updateLabel.setText( fmt.format(this.updateTime) );
+      }
    }
    
    // Helper method to convert the temperature to proper units
@@ -130,9 +133,14 @@ public class FXMLTempAppController implements Initializable {
       System.out.println(data);      
       
       // Use GSON to convert the JSON to a POJO (whew, that's a lot of acronyms!)
+      // If JSON is not valid then just return
       Gson gson = new Gson();
-      this.temperature = gson.fromJson(data, Temperature.class);      
-            
+      try {
+         this.temperature = gson.fromJson(data, Temperature.class);      
+      } catch (Exception e) {
+         System.out.println("GSON Parsing Failed");
+         return;
+      }            
       // Schedule UI updates on the GUI thread
       // This is important because the data download happens in the background
       Platform.runLater( new Runnable() {
@@ -161,7 +169,7 @@ public class FXMLTempAppController implements Initializable {
             // Set this in your environment. When you distribute the app, how you store and distribute this value is something to address.
             // We will review how I set this value in class.
             HttpRequest request = HttpRequest.newBuilder()
-                                             .uri(new URI("https://api.openweathermap.org/data/2.5/weather?lat=40.17423766234042&lon=-75.27796262961655&exclude=minutely,hourly&appid=" + System.getenv("APIKEY") ))
+                                             .uri(new URI("https://api.openweathermap.org/data/2.5/weather?lat=40.17423766234042&lon=-75.27796262961655&exclude=minutely,hourly&appid=" + 1233455 ))//System.getenv("APIKEY") ))
                                              .GET()
                                              .build();
                              
